@@ -14,6 +14,6 @@
     </label>
     <button>{{ isSignUp === false ? 'Login' : 'Sign Up' }}</button>
 </form>
-<div *ngIf="isSignUp">Have an account? click <a [routerLink]="['/auth/login']">here</a> to sign in</div>
-<div *ngIf="!isSignUp">Don't have an account? Click <a [routerLink]="['/auth/register']">here</a> to sign up</div>
+<div *ngIf="isSignUp">Have an account? click <a [routerLink]="['/auth/login']" class="underline">here</a> to sign in</div>
+<div *ngIf="!isSignUp">Don't have an account? Click <a [routerLink]="['/auth/register']" class="underline">here</a> to sign up</div>
 <div *ngIf="!isSignUp"><a [routerLink]="['/auth/forgot-password']">Forgot password</a></div>
