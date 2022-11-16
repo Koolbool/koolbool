@@ -1,0 +1,4 @@
+.btn-primary {
+    @apply bg-black;
+    height: 50px;
+  }
