@@ -1,0 +1,19 @@
+<img src="../../../../../assets/icons/koolboolpng.png">
+<form>
+    <label>
+        Username
+        <input type="text">
+    </label>
+    <label>
+        Password
+        <input type="password">
+    </label>
+    <label *ngIf="isSignUp">
+        Repeat password
+        <input type="password">
+    </label>
+    <button>{{ isSignUp === false ? 'Login' : 'Sign Up' }}</button>
+</form>
+<div *ngIf="isSignUp">Have an account? click <a [routerLink]="['/auth/login']">here</a> to sign in</div>
+<div *ngIf="!isSignUp">Don't have an account? Click <a [routerLink]="['/auth/register']">here</a> to sign up</div>
+<div *ngIf="!isSignUp"><a [routerLink]="['/auth/forgot-password']">Forgot password</a></div>
