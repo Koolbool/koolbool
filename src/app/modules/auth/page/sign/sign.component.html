@@ -1,18 +1,42 @@
 <img type="png" src="../../../../../assets/icons/koolbool.png">
-<form>
+<div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+</div>
+<div *ngIf="error">
+    <p>{{ error }}</p>
+</div>
+<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
     <label>
-        Username
-        <input type="text">
+        Email
+        <input 
+            type="email"
+            name="email"
+            required
+            email
+            ngModel
+        >
     </label>
     <label>
         Password
-        <input type="password">
+        <input
+            type="password"
+            name="password"
+            required
+            minlength="6"
+            ngModel
+        >
     </label>
     <label *ngIf="isSignUp">
         Repeat password
-        <input type="password">
+        <input
+            type="password"
+            name="password"
+            required
+            minlength="6"
+            ngModel
+        >
     </label>
-    <app-button [message]="isSignUp === false ? 'Login' : 'Sign Up'"></app-button>
+    <app-button [message]="isSignUp === false ? 'Login' : 'Sign Up'" [attr.disabled]="!authForm"></app-button>
 </form>
 <div *ngIf="isSignUp">Have an account? click <a [routerLink]="['/auth/login']" class="underline">here</a> to sign in</div>
 <div *ngIf="!isSignUp">Don't have an account? Click <a [routerLink]="['/auth/register']" class="underline">here</a> to sign up</div>

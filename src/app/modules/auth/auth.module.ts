@@ -6,6 +6,7 @@ import { SignComponent } from './page/sign/sign.component';
 import { ChangePasswordComponent } from './page/change-password/change-password.component';
 import { ForgotPasswordComponent } from './page/forgot-password/forgot-password.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     AuthRoutingModule,
     SharedModule,
+    FormsModule,
   ]
 })
 export class AuthModule { }

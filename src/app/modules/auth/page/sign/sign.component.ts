@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
@@ -9,51 +10,43 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class SignComponent implements OnInit {
   isSignUp: boolean = false;
-  email : string = '';
-  password : string = '';
+  isLoading = false;
+  error: string = '';
 
-  constructor(private route: ActivatedRoute, private auth: AuthService ) { }
+  constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.isSignUp = this.route.snapshot.data['isSignUp'];
     console.log(this.isSignUp);
   }
 
-  login() {
-
-    if(this.email == '') {
-      alert('Please enter email');
-      return;
-    }
-
-    if(this.password == '') {
-      alert('Please enter password');
-      return;
-    }
-
-    this.auth.login(this.email,this.password);
+  onSubmit(form: NgForm) {
+    if (!form.valid) return
+    const email = form.value.email;
+    const password = form.value.password;
     
-    this.email = '';
-    this.password = '';
-
-  }
-
-  register() {
-
-    if(this.email == '') {
-      alert('Please enter email');
-      return;
+    this.isLoading = true;
+    if (this.isSignUp) {
+      this.auth.register(email, password)
+        .then(res => {
+          console.log('successful registration');
+          console.log(res.user);
+        })
+        .catch(e => {
+          this.error = e.message;
+        })
+      this.isLoading = false;
+    } else {
+      this.auth.login(email, password)
+        .then(res => {
+          console.log('login successful');
+        })
+        .catch(e => {
+          this.error = e.message;
+        })
+      this.isLoading = false;
     }
 
-    if(this.password == '') {
-      alert('Please enter password');
-      return;
-    }
-
-    this.auth.register(this.email,this.password);
-    
-    this.email = '';
-    this.password = '';
-
+    form.reset();
   }
 }
