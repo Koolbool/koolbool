@@ -5,6 +5,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './button.component.html'
 })
 export class ButtonComponent {
-  @Input() message: string | undefined;
+  @Input() message!: string;
+  @Input() disabled: boolean = false;
 
 }

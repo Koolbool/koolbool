@@ -5,38 +5,31 @@
 <div *ngIf="error">
     <p>{{ error }}</p>
 </div>
-<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
-    <label>
-        Email
-        <input 
-            type="email"
-            name="email"
-            required
-            email
-            ngModel
-        >
-    </label>
-    <label>
-        Password
-        <input
-            type="password"
-            name="password"
-            required
-            minlength="6"
-            ngModel
-        >
-    </label>
-    <label *ngIf="isSignUp">
-        Repeat password
-        <input
-            type="password"
-            name="password"
-            required
-            minlength="6"
-            ngModel
-        >
-    </label>
-    <app-button [message]="isSignUp === false ? 'Login' : 'Sign Up'" [attr.disabled]="!authForm"></app-button>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <app-input-field
+        labelText="Email"
+        labelName="Email"
+        name="email"
+        type="email"
+        [control]="$any(form.get('email'))"
+        [required]="true"
+    ></app-input-field>
+    <app-input-field
+        labelText="Password"
+        labelName="Password"
+        name="password"
+        type="password"
+        [control]="$any(form.get('password'))"
+    ></app-input-field>
+    <app-input-field
+        *ngIf="isSignUp"
+        labelText="Confirm password"
+        labelName="Confirm Password"
+        name="confirmPassword"
+        type="password"
+        [control]="$any(form.get('confirmPassword'))"
+    ></app-input-field>
+    <app-button [message]="isSignUp === false ? 'Login' : 'Sign Up'" [disabled]="!form.valid ? true : false"></app-button>
 </form>
 <div *ngIf="isSignUp">Have an account? click <a [routerLink]="['/auth/login']" class="underline">here</a> to sign in</div>
 <div *ngIf="!isSignUp">Don't have an account? Click <a [routerLink]="['/auth/register']" class="underline">here</a> to sign up</div>
