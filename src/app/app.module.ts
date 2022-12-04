@@ -9,7 +9,6 @@ import { SharedModule } from './shared/shared.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 @NgModule({
   declarations: [
     AppComponent,

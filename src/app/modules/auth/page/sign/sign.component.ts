@@ -24,9 +24,6 @@ export class SignComponent implements OnInit {
   });
 
   constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router, private formBuilder: FormBuilder) {
-    // this.form.valueChanges.subscribe((val) => {
-    //   console.log(val);
-    // });
 
     function createCompareValidator(controlOne: AbstractControl, controlTwo: AbstractControl) {
       return () => {
