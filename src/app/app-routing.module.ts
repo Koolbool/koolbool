@@ -4,13 +4,15 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
 import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/compat/auth-guard';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth']);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
 
 const routes: Routes = [
   {
     path: 'auth',
     component: AuthLayoutComponent,
-    loadChildren: () => import('./modules/auth/auth.module').then(module => module.AuthModule)
+    loadChildren: () => import('./modules/auth/auth.module').then(module => module.AuthModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToDashboard }
   },
   {
     path: 'dashboard',
