@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/shared/auth.service';
   styleUrls: ['./dashboard-layout.component.css']
 })
 export class DashboardLayoutComponent implements OnInit {
+  navIsOpen: boolean = false;
 
   constructor(private auth: AuthService) {}
 
@@ -15,5 +16,9 @@ export class DashboardLayoutComponent implements OnInit {
 
   onLogout() {
     this.auth.logout();
+  }
+
+  toggleNav() {
+    console.log("hey");
   }
 }

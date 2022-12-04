@@ -1,4 +1,26 @@
 <div>
-    <a (click)="onLogout()">Logout</a>
+    <nav 
+        class="flex w-full flex-col bg-slate-100"
+        [ngClass]="navIsOpen ? 'h-screen' : ''"
+    >
+        <div 
+            class="flex w-full"
+            [ngClass]="navIsOpen ? 'justify-start' : 'justify-end'"
+        >
+            <div
+                class="flex p-1 m-2"
+                (click)="navIsOpen = !navIsOpen"
+            >
+                <img src="../../../assets/icons/menu.svg">
+            </div>
+        </div>
+        <div class="w-full flex justify-center text-center" *ngIf="navIsOpen">
+            <ul>
+                <li><a routerLink="/dashboard/home" (click)="navIsOpen = false">Home</a></li>
+                <li><a routerLink="/dashboard/profile" (click)="navIsOpen = false">Profile</a></li>
+                <li><a (click)="onLogout()" (click)="navIsOpen = false">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
     <router-outlet></router-outlet>
 </div>
