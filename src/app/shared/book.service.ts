@@ -31,4 +31,8 @@ export class BookService {
     let docRef = doc(this.fs, `Books/${book.id}`);
     return updateDoc(docRef, books)
   }
+
+  updateBookData(book: Book){
+
+  }
 }
