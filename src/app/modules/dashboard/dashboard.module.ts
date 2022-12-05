@@ -7,6 +7,7 @@ import { ProfileComponent } from './page/profile/profile.component';
 import { BooksComponent } from './page/books/books.component';
 import { BookComponent } from './page/book/book.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AddBookComponent } from './page/add-book/add-book.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     HomeComponent,
     ProfileComponent,
     BooksComponent,
-    BookComponent
+    BookComponent,
+    AddBookComponent
   ],
   imports: [
     CommonModule,

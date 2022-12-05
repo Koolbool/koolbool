@@ -1,0 +1,10 @@
+<p>add-book works!</p>
+<h1>Add the book</h1>
+<div class="book-image">
+  <img alt="Can't show image" width="150" height="150" [src]="'#'" />
+  <!---->
+  <button (click)="upload.click()">
+    Upload Book Image
+  </button>
+  <input #upload type="file" hidden (change)="uploadImage($event)">
+</div>
