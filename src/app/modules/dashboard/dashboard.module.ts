@@ -8,6 +8,9 @@ import { BooksComponent } from './page/books/books.component';
 import { BookComponent } from './page/book/book.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddBookComponent } from './page/add-book/add-book.component';
+import { ReviewComponent } from './page/review/review.component';
+import { AddReviewComponent } from './page/add-review/add-review.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,12 +19,15 @@ import { AddBookComponent } from './page/add-book/add-book.component';
     ProfileComponent,
     BooksComponent,
     BookComponent,
-    AddBookComponent
+    AddBookComponent,
+    ReviewComponent,
+    AddReviewComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }

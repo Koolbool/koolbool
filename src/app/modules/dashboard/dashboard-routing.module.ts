@@ -5,6 +5,8 @@ import { BooksComponent } from './page/books/books.component';
 import { HomeComponent } from './page/home/home.component';
 import { ProfileComponent } from './page/profile/profile.component';
 import { AddBookComponent } from './page/add-book/add-book.component';
+import { ReviewComponent } from './page/review/review.component';
+import { AddReviewComponent } from './page/add-review/add-review.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,10 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
+    path: 'add',
+    component: AddBookComponent
+  },
+  {
     path: 'books',
     component: BooksComponent
   },
@@ -24,8 +30,12 @@ const routes: Routes = [
     component: BookComponent
   },
   {
-    path: 'book/add',
-    component: AddBookComponent
+    path: 'review',
+    component: ReviewComponent
+  },
+  {
+    path: 'add/review',
+    component: AddReviewComponent
   },
   {
     path: '',

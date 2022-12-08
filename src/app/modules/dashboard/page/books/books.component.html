@@ -8,5 +8,19 @@
     />
     <app-button [message]="'Find'"></app-button>
   </div>
-
+  <div *ngIf="!hasSearched">
+    Search for a book name above to see a list of books!
+  </div>
+  <ng-container *ngIf="books | async as booksList">
+    <ul>
+      <li *ngFor="let book of booksList">
+        Name: {{ book.bookname }},
+        Description: {{ book.description }},
+        Authors: {{ book.bookauthors }},
+        Categories: {{ book.categories }},
+        Url: {{ book.bookurl }}
+      </li>
+    </ul>
+    <button (click)="getNextBooks()">Get next books</button>
+  </ng-container>
 </div>
