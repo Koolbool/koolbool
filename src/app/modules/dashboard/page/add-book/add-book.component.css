@@ -1,0 +1,6 @@
+label span {
+    display: block;
+}
+label input {
+    border: 1px solid black;
+}

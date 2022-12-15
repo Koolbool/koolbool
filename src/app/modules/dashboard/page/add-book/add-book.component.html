@@ -11,14 +11,54 @@
 
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
   <app-input-field
     class="w-full"
-    labelText="bookname"
-    labelName="Book name"
+    labelText="Book Name"
+    labelName="bookname"
     name="bookname"
     type="text"
     [control]="$any(form.get('bookname'))"
-    [required]="true"
   ></app-input-field>
-  <app-button [message]="'Add Book'"></app-button>
+
+  <app-input-field
+    class="w-full"
+    labelText="Description"
+    labelName="description"
+    name="description"
+    type="text"
+    [control]="$any(form.get('description'))"
+  ></app-input-field>
+
+  <app-input-field
+    class="w-full"
+    labelText="Book Url"
+    labelName="bookurl"
+    name="bookurl"
+    type="text"
+    [control]="$any(form.get('bookurl'))"
+  ></app-input-field>
+
+  <div>
+    <label>
+      <span>Select categories:</span>
+      <select [formControl]="$any(form.get('categories'))" multiple>
+        <option *ngFor="let genre of genres" [value]="genre">
+          {{ genre }}
+        </option>
+      </select>
+    </label>
+    <div>
+      <p>You selected: <span>{{ form.controls.categories.value }}</span></p>
+    </div>
+  </div>
+
+  <div formArrayName="authors">
+    <div *ngFor="let author of form.controls.authors.value; let i = index; trackBy: trackByFn">
+      Author {{ i+1 }} <input type="text" [formControlName]="i">
+    </div>
+    <button type="button" (click)="addAuthor()">Add Author</button>
+  </div>
+  
+  <app-button [message]="'Add Book'" [disabled]="!form.valid"></app-button>
 </form>

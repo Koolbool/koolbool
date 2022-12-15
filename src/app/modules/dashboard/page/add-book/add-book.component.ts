@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { concatMap } from 'rxjs';
 import { Book } from 'src/app/shared/book';
 import { BookService } from 'src/app/shared/book.service';
@@ -14,17 +14,17 @@ export class AddBookComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  bookname = new FormControl('bookname', [Validators.required]);
-  description = new FormControl('description', [Validators.required]);
+  author = new FormControl('');
 
   form = this.formBuilder.group({
-    bookname: this.bookname,
-    description: this.description
+    bookname: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
+    authors: new FormArray([new FormControl()]),
+    categories: new FormControl([''], [Validators.required]),
+    bookurl: new FormControl('', [Validators.required])
   });
 
-  bookauthorstest: string[] = ['Martin'];
-  categoriestest: string[] = ['Comedy', 'Fantasy'];
-
+  genres = ['Action', 'Adventure', 'Comedy', 'Mystery', 'Fantasy', 'Horror', 'Romance', 'Sci-fi', 'Thriller'];
 
   constructor(private bookService: BookService, private formBuilder: FormBuilder) { }
 
@@ -40,19 +40,34 @@ export class AddBookComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.form.value)
+    // console.log("this", this.form.value)
     if (this.form?.valid) {
       console.log("its valid");
 
       this.isLoading = true;
-        const b = {'bookurl': 'testurl.com', 'bookauthors': this.bookauthorstest, 'categories': this.categoriestest, 'description': 'the description of the book', 'bookname': 'a test book'}
-        this.bookService.addBook(b)
-        this.isLoading = false;
-        this.form.reset();
+      const b = {
+        'bookname': this.form.controls.bookname.value,
+        'bookauthors': this.form.controls.authors.value,
+        'description': this.form.controls.description.value,
+        'categories': this.form.controls.categories.value,
+        'bookurl': this.form.controls.bookurl.value,
+      }
+      console.log(b);
+      this.bookService.addBook(b as Book)
+      this.isLoading = false;
+      this.form.reset();
     } else {
       console.log("it aint valid");
       return
     }
   }
+
+  addAuthor() {
+    this.form.controls.authors.push(new FormControl(''));
+  }
+
+  trackByFn(index: any) {
+    return index;
+ }
 
 }
