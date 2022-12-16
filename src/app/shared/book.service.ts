@@ -20,15 +20,25 @@ export class BookService {
     this.books = this.booksCollection.valueChanges();
   }
 
+  // gets all books
   getBooks() {
-    // return this.books;
     return this.booksCollection.valueChanges({idField: 'id'})
-
   }
 
+  // gets a specific book with id
+  getBook(docId: any) {
+    return this.fs
+      .collection('Books')
+      .doc(docId)
+      .valueChanges();
+  }
+
+  // add a book to the collection
   addBook(b: Book) {
     this.booksCollection.add(b).then((e) =>  console.log(e))
   }
+
+
   // -------------------
 
   // constructor(private fs : AngularFirestore) {}

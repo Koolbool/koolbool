@@ -1,3 +1,5 @@
-<p>
-  book works!
-</p>
+<div *ngIf="book != undefined">
+  <h2>{{ book.bookname }}</h2>
+  <p>{{ book.description }}</p>
+  <p>Written by {{ book.bookauthors }}</p>
+</div>
