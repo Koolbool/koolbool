@@ -22,12 +22,12 @@ const routes: Routes = [
     component: AddBookComponent
   },
   {
-    path: 'books',
-    component: BooksComponent
-  },
-  {
     path: 'book/:id',
     component: BookComponent
+  },
+  {
+    path: 'books',
+    component: BooksComponent
   },
   {
     path: 'review',

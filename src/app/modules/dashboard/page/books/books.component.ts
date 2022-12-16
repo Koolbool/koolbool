@@ -23,7 +23,7 @@ export class BooksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.books = this.bookService.getBooks();
+    this.books = this.bookService.getBooks()
   }
 
   getNextBooks() {

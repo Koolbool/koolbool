@@ -13,12 +13,17 @@
   </div>
   <ng-container *ngIf="books | async as booksList">
     <ul>
-      <li *ngFor="let book of booksList">
-        Name: {{ book.bookname }},
-        Description: {{ book.description }},
-        Authors: {{ book.bookauthors }},
-        Categories: {{ book.categories }},
-        Url: {{ book.bookurl }}
+      <li *ngFor="let book of booksList" class="py-2">
+        <div>
+          Name: {{ book.bookname }}
+        </div>
+        <div>
+          Authors: By {{ book.bookauthors }}
+        </div>
+        <div>
+          Categories: {{ book.categories }}
+        </div>
+        <a [routerLink]="['/dashboard/book/', book.id]">Click here to view book</a>
       </li>
     </ul>
     <button (click)="getNextBooks()">Get next books</button>

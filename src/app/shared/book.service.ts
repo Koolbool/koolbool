@@ -21,7 +21,9 @@ export class BookService {
   }
 
   getBooks() {
-    return this.books;
+    // return this.books;
+    return this.booksCollection.valueChanges({idField: 'id'})
+
   }
 
   addBook(b: Book) {
