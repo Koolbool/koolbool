@@ -2,4 +2,5 @@
   <h2>{{ book.bookname }}</h2>
   <p>{{ book.description }}</p>
   <p>Written by {{ book.bookauthors }}</p>
+  <a [routerLink]="['/dashboard/add-review', id]">Add a review!</a>
 </div>

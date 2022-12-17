@@ -22,6 +22,10 @@ const routes: Routes = [
     component: AddBookComponent
   },
   {
+    path: 'add-review/:id',
+    component: AddReviewComponent
+  },
+  {
     path: 'book/:id',
     component: BookComponent
   },
@@ -32,10 +36,6 @@ const routes: Routes = [
   {
     path: 'review',
     component: ReviewComponent
-  },
-  {
-    path: 'add/review',
-    component: AddReviewComponent
   },
   {
     path: '',

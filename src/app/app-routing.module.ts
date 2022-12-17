@@ -9,23 +9,23 @@ const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
 
 const routes: Routes = [
   {
-    path: 'auth',
-    component: AuthLayoutComponent,
-    loadChildren: () => import('./modules/auth/auth.module').then(module => module.AuthModule),
-    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToDashboard }
-  },
-  {
     path: 'dashboard',
     component: DashboardLayoutComponent,
     loadChildren: () => import('./modules/dashboard/dashboard.module').then(module => module.DashboardModule),
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'auth',
+    component: AuthLayoutComponent,
+    loadChildren: () => import('./modules/auth/auth.module').then(module => module.AuthModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToDashboard }
   },
   // fallback route when no other route match
   { path: '**', redirectTo: '/auth/login', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

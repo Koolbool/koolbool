@@ -1,3 +1,22 @@
-<p>
-  add-review works!
-</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <app-input-field
+    class="w-full"
+    labelText="Review Title"
+    labelName="title"
+    name="title"
+    type="text"
+    [control]="form.controls.title"
+  ></app-input-field>
+  
+  <app-input-field
+    class="w-full"
+    labelText="Comment"
+    labelName="comment"
+    name="comment"
+    type="text"
+    [control]="form.controls.comment"
+  ></app-input-field>
+
+  <app-button [message]="'Add Review'" [disabled]="!form.valid"></app-button>
+</form>
