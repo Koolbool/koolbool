@@ -94,6 +94,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "koolbool-webapp:build:production",
+            "firebaseProject": "koolbool-1c1ea",
+            "firebaseHostingSite": "koolbool-1c1ea"
+          }
         }
       }
     }

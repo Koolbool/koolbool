@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "koolbool-1c1ea"
+  },
+  "targets": {
+    "koolbool-1c1ea": {
+      "hosting": {
+        "koolbool-webapp": [
+          "koolbool-1c1ea"
+        ]
+      }
+    }
   }
 }
