@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from 'src/app/shared/book';
 import { BookService } from 'src/app/shared/book.service';
+import { reviews } from 'src/app/shared/reviews';
 
 @Component({
   selector: 'app-book',
@@ -9,8 +10,10 @@ import { BookService } from 'src/app/shared/book.service';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-  book!: Book;
+  book!: any;
   id: string | null;
+
+  reviews!: reviews;
 
   constructor(private route: ActivatedRoute, private bookService: BookService) {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -22,7 +25,7 @@ export class BookComponent implements OnInit {
       .getBook(this.id)
       .subscribe((book) => {
         this.book = book as Book;
-        console.log(book);
+        this.reviews = this.book.reviews;
       })
     
   }

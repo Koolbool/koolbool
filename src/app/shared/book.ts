@@ -4,5 +4,5 @@ export interface Book {
   bookauthors: string[];
   description:string;
   categories: string[];
-  bookurl: string; 
+  bookurl: string;
 }

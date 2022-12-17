@@ -2,5 +2,13 @@
   <h2>{{ book.bookname }}</h2>
   <p>{{ book.description }}</p>
   <p>Written by {{ book.bookauthors }}</p>
+  <p>COMMENTS:</p>
+  <ul>
+    <li *ngFor="let item of book.reviews" class="p-1 bg-blue-400 my-2">
+      <p>{{ item.title }}</p>
+      <p>{{ item.comment }}</p>
+    </li>
+  </ul>
+
   <a [routerLink]="['/dashboard/add-review', id]">Add a review!</a>
 </div>

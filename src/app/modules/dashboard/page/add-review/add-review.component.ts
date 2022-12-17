@@ -38,7 +38,7 @@ export class AddReviewComponent implements OnInit {
       console.log("success!");
       console.log("Routing you back to book page in 3 seconds!");
       setTimeout(() => {
-        this.router.navigate(['/dashboard/', this.id])
+        this.router.navigate(['/dashboard/book/', this.id])
       }, 3000)
     } else {
       console.log('form aint valid');
