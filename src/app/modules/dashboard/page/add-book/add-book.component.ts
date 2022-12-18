@@ -14,19 +14,26 @@ export class AddBookComponent implements OnInit {
 
   isLoading: boolean = false;
 
+  selectedFile!: File;
   author = new FormControl('');
 
   form = this.formBuilder.group({
-    bookname: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
+    bookname: new FormControl('', []),
+    description: new FormControl('', []),
     authors: new FormArray([new FormControl()]),
-    categories: new FormControl([''], [Validators.required]),
-    bookurl: new FormControl('', [Validators.required])
+    categories: new FormControl([''], []),
+    bookurl: new FormControl('', []),
+    fileurl: new FormControl<String>('', [])
   });
+
+  selectFile(event: any) {
+    this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile);
+  }
 
   genres = ['Action', 'Adventure', 'Comedy', 'Mystery', 'Fantasy', 'Horror', 'Romance', 'Sci-fi', 'Thriller'];
 
-  constructor(private bookService: BookService, private formBuilder: FormBuilder) { }
+  constructor(private bookService: BookService, private imgUploadService: ImageUploadService,private formBuilder: FormBuilder) { }
 
   // uploadImage(event: any){
   //   this.imageUploadService.uploadImage(event.target.files[0], 'image/book/').subscribe(
@@ -53,7 +60,8 @@ export class AddBookComponent implements OnInit {
         'bookurl': this.form.controls.bookurl.value,
       }
       console.log(b);
-      this.bookService.addBook(b as Book)
+      // this.imgUploadService.uploadImage(this.selectedFile);
+      this.bookService.addBook(b as Book, this.selectedFile);
       this.isLoading = false;
       this.form.reset();
     } else {

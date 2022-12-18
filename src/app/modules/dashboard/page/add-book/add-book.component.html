@@ -39,6 +39,8 @@
     [control]="$any(form.get('bookurl'))"
   ></app-input-field>
 
+  <input type="file" (change)="selectFile($event)">
+  
   <div>
     <label>
       <span>Select categories:</span>

@@ -5,4 +5,5 @@ export interface Book {
   description:string;
   categories: string[];
   bookurl: string;
+  bookimgurl?: string;
 }

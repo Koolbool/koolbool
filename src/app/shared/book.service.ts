@@ -5,6 +5,7 @@ import { collection } from '@angular/fire/firestore';
 import { map, Observable } from 'rxjs';
 import { deleteDoc, updateDoc } from '@firebase/firestore';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class BookService {
   private booksCollection: AngularFirestoreCollection<Book>;
   books: Observable<Book[]>;
 
-  constructor( private fs: AngularFirestore ) {
+  constructor( private fs: AngularFirestore, private storage: AngularFireStorage) {
     this.booksCollection = fs.collection<Book>('Books');
     this.books = this.booksCollection.valueChanges();
   }
@@ -34,14 +35,22 @@ export class BookService {
   }
 
   // add a book to the collection
-  addBook(b: Book) {
-    this.booksCollection.add(b).then((e) =>  console.log(e))
+  async addBook(b: Book, e: any) {
+    const file = e;
+    const filePath = 'book/' + e.name;
+    const task = this.storage.upload(filePath, file);
+
+    await task;
+    this.storage.ref(filePath).getDownloadURL().subscribe(getDownloadURL => {
+      b.bookimgurl = getDownloadURL;
+      this.booksCollection.add(b).then((e) => console.log(e));
+    });
+
+    // this.booksCollection.add(b).then((e) =>  console.log(e));
   }
 
 
   // -------------------
-
-  // constructor(private fs : AngularFirestore) {}
 
   // getBooks(lastBook?: Book): Observable<Book[]> {
   //   let query = this.fs.collection<Book>('Books', ref => ref.limit(1));

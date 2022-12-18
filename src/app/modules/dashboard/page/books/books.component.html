@@ -14,6 +14,7 @@
   <ng-container *ngIf="books | async as booksList">
     <ul>
       <li *ngFor="let book of booksList" class="py-2">
+        <img [src]="book.bookimgurl">
         <div>
           Name: {{ book.bookname }}
         </div>
