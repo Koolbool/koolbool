@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore } from '@angular/fire/firestore/firebase';
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 import { Book } from 'src/app/shared/book';
 import { BookService } from 'src/app/shared/book.service';
 
@@ -10,16 +11,25 @@ import { BookService } from 'src/app/shared/book.service';
   styleUrls: ['./books.component.css'],
 })
 export class BooksComponent implements OnInit {
-  searchInput: string = '';
   books!: Observable<Book[]>;
-  lastBook!: Book;
-  hasSearched = false;
+  searchedBook!: Book[];
+  hasSearched: boolean = false;
+  // lastBook!: Book;
   
-  constructor(private bookService: BookService) {
+  constructor(private bookService: BookService, private afs: AngularFirestore) {
   }
 
-  bookSearch(event: any) {
-    console.log(event.target.value);
+  bookSearch(name: string) {
+    // use algolia in the future for query on search
+    if (name.length < 3) {
+      return
+    }
+    this.hasSearched = true;
+    return this.afs.collection('Books', ref => ref.where('bookname', '==', name))
+      .valueChanges()
+      .subscribe((book) => {
+        this.searchedBook = book as Book[];
+      })
   }
 
   ngOnInit() {

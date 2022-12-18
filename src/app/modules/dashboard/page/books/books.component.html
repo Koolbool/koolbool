@@ -1,32 +1,48 @@
 <div>
   <div class="flex flex-col items-center">
-    <input
-      type="text" 
-      class="border border-blue-200 p-2"
-      placeholder="Enter book name" 
-      (change)="bookSearch($event)"
-    />
-    <app-button [message]="'Find'"></app-button>
+
+    <form (ngSubmit)="bookSearch(searchTerm.value)">
+      <input
+        type="text" 
+        class="border border-blue-200 p-2"
+        placeholder="Enter book name"
+        #searchTerm
+      />
+      <app-button [message]="'Find'" type="Submit"></app-button>
+    </form>
+
   </div>
-  <div *ngIf="!hasSearched">
-    Search for a book name above to see a list of books!
-  </div>
-  <ng-container *ngIf="books | async as booksList">
-    <ul>
-      <li *ngFor="let book of booksList" class="py-2">
-        <img [src]="book.bookimgurl">
-        <div>
-          Name: {{ book.bookname }}
-        </div>
-        <div>
-          Authors: By {{ book.bookauthors }}
-        </div>
-        <div>
-          Categories: {{ book.categories }}
-        </div>
-        <a [routerLink]="['/dashboard/book/', book.id]">Click here to view book</a>
-      </li>
-    </ul>
-    <button (click)="getNextBooks()">Get next books</button>
+  <ng-container *ngIf="searchedBook">
+    <div *ngIf="searchedBook.length === 0">
+      Please make sure you type the book name correctly capital letters matter!
+    </div>
+    <ng-container *ngFor="let book of searchedBook">
+      {{ book.bookname }}
+      <img [src]="book.bookimgurl" alt="">
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="!searchedBook">
+    <ng-container *ngIf="books | async as booksList">
+      <div>
+        Search for a book name above to see a specific book!
+      </div>
+      <ul>
+        <li *ngFor="let book of booksList" class="py-2">
+          <img [src]="book.bookimgurl">
+          <div>
+            Name: {{ book.bookname }}
+          </div>
+          <div>
+            Authors: By {{ book.bookauthors }}
+          </div>
+          <div>
+            Categories: {{ book.categories }}
+          </div>
+          <a [routerLink]="['/dashboard/book/', book.id]">Click here to view book</a>
+        </li>
+      </ul>
+      <button (click)="getNextBooks()">Get next books</button>
+    </ng-container>
   </ng-container>
 </div>

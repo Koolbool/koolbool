@@ -10,7 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddBookComponent } from './page/add-book/add-book.component';
 import { ReviewComponent } from './page/review/review.component';
 import { AddReviewComponent } from './page/add-review/add-review.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SharedModule,
     DashboardRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class DashboardModule { }
