@@ -26,7 +26,7 @@ export class BooksComponent implements OnInit {
     }
     this.hasSearched = true;
     return this.afs.collection('Books', ref => ref.where('bookname', '==', name))
-      .valueChanges()
+      .valueChanges({idField: 'id'})
       .subscribe((book) => {
         this.searchedBook = book as Book[];
       })

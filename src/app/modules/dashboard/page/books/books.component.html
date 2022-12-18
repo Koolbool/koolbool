@@ -17,8 +17,17 @@
       Please make sure you type the book name correctly capital letters matter!
     </div>
     <ng-container *ngFor="let book of searchedBook">
-      {{ book.bookname }}
-      <img [src]="book.bookimgurl" alt="">
+      <img [src]="book.bookimgurl">
+        <div>
+          Name: {{ book.bookname }}
+        </div>
+        <div>
+          Authors: By {{ book.bookauthors }}
+        </div>
+        <div>
+          Categories: {{ book.categories }}
+        </div>
+        <a [routerLink]="['/dashboard/book/', book.id]">Click here to view book</a>
     </ng-container>
   </ng-container>
 
