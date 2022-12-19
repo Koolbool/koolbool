@@ -11,6 +11,7 @@ import { AddBookComponent } from './page/add-book/add-book.component';
 import { ReviewComponent } from './page/review/review.component';
 import { AddReviewComponent } from './page/add-review/add-review.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FinishSignupComponent } from './page/finish-signup/finish-signup.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BookComponent,
     AddBookComponent,
     ReviewComponent,
-    AddReviewComponent
+    AddReviewComponent,
+    FinishSignupComponent
   ],
   imports: [
     CommonModule,

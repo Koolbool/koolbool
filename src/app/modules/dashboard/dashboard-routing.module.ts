@@ -7,8 +7,13 @@ import { ProfileComponent } from './page/profile/profile.component';
 import { AddBookComponent } from './page/add-book/add-book.component';
 import { ReviewComponent } from './page/review/review.component';
 import { AddReviewComponent } from './page/add-review/add-review.component';
+import { FinishSignupComponent } from './page/finish-signup/finish-signup.component';
 
 const routes: Routes = [
+  {
+    path: 'complete-signup',
+    component: FinishSignupComponent
+  },
   {
     path: 'home',
     component: HomeComponent

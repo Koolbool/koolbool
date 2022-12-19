@@ -1,0 +1,43 @@
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngIf="stage1">
+      <label>
+        <span>Select account type:</span>
+        <select>
+          <option *ngFor="let number of accountType">{{ number }}</option>
+        </select>
+      </label>
+      <app-input-field
+        class="w-full"
+        labelText="Full name"
+        labelName="Full name"
+        name="displayName"
+        type="text"
+        [control]="form.controls.displayName"
+        [required]="true"
+      ></app-input-field>
+      <label>
+        <span>Select a profile picture:</span>
+        <input type="file" (change)="selectFile($event)">
+      </label>
+      <button class="block mx-auto" type="button" (click)="stage1 = false">Next</button>
+    </div>
+    <div *ngIf="!stage1">
+      <button class="block mx-auto" type="button" (click)="stage1 = true">Back</button>
+      <app-input-field
+        class="w-full"
+        labelText="Phone number"
+        labelName="Phone number"
+        name="phoneNumber"
+        type="text"
+        [control]="form.controls.phoneNumber"
+        [required]="true"
+      ></app-input-field>
+      <app-button
+        class="w-full"
+        [message]="'Complete Signup'"
+        [disabled]="!form.valid ? true : false"
+      ></app-button>
+    </div>
+  </form>
+</div>
