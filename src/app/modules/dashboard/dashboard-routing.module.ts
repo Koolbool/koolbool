@@ -8,6 +8,7 @@ import { AddBookComponent } from './page/add-book/add-book.component';
 import { ReviewComponent } from './page/review/review.component';
 import { AddReviewComponent } from './page/add-review/add-review.component';
 import { FinishSignupComponent } from './page/finish-signup/finish-signup.component';
+import { FullAuthGuardService } from 'src/app/shared/services/FullAuthGuard.service';
 
 const routes: Routes = [
   {
@@ -16,31 +17,38 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [FullAuthGuardService]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [FullAuthGuardService]
   },
   {
     path: 'add',
-    component: AddBookComponent
+    component: AddBookComponent,
+    canActivate: [FullAuthGuardService]
   },
   {
     path: 'add-review/:id',
-    component: AddReviewComponent
+    component: AddReviewComponent,
+    canActivate: [FullAuthGuardService]
   },
   {
     path: 'book/:id',
-    component: BookComponent
+    component: BookComponent,
+    canActivate: [FullAuthGuardService]
   },
   {
     path: 'books',
-    component: BooksComponent
+    component: BooksComponent,
+    canActivate: [FullAuthGuardService]
   },
   {
     path: 'review',
-    component: ReviewComponent
+    component: ReviewComponent,
+    canActivate: [FullAuthGuardService]
   },
   {
     path: '',

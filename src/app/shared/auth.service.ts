@@ -11,8 +11,8 @@ export class AuthService {
   constructor(private fireauth: AngularFireAuth, private router: Router) {
     this.fireauth.authState.subscribe(res => {
       if (res) {
-        console.log("user is signed in");
-        console.log(res);
+        // console.log("user is signed in");
+        // console.log(res);
         this.router.navigate(['/dashboard/home']);
       } else {
         console.log("nobody is signed in");

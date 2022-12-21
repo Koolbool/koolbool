@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   auth = getAuth();
 
   constructor() {
-    console.log(this.auth.currentUser);
+    // console.log(this.auth.currentUser);
   }
 
   ngOnInit(): void {

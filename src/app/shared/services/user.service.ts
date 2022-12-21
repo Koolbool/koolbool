@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { User } from '@firebase/auth';
+import { map, Observable, ReplaySubject, Subject, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,24 @@ export class UserService {
         u.photoURL = getDownloadURL;
         this.userCollection.doc(user?.uid).set(u);
       });
+    })
+  }
+
+  async hasUserCompletedFullSignup() {
+    // need to make sure this includes the User interface in the future || works but maybe need to check if there is
+    // something else I can use rather than display name in the future?
+    return new Promise((resolve, reject) => {
+      this.afAuth.authState.subscribe(user => {
+        this.afs.collection('Users').doc(user?.uid).get().subscribe((e: any) => {
+          if (e.data()?.displayName) {
+            resolve(true);
+          } else {
+            reject(false);
+          }
+        })
+      })
+    }).catch((res) => {
+      console.log(res);
     })
   }
 
