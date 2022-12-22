@@ -13,7 +13,7 @@ import { FullAuthGuardService } from 'src/app/shared/services/FullAuthGuard.serv
 const routes: Routes = [
   {
     path: 'complete-signup',
-    component: FinishSignupComponent
+    component: FinishSignupComponent,
   },
   {
     path: 'home',

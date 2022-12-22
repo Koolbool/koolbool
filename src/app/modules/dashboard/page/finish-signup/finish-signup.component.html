@@ -1,14 +1,15 @@
-<div>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="flex flex-col items-center w-5/6 mx-auto">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-12 w-full">
     <div *ngIf="stage1">
-      <label>
-        <span>Select account type:</span>
-        <select>
-          <option *ngFor="let number of accountType">{{ number }}</option>
+      <label class="flex justify-between mb-6">
+        <span>Account type:</span>
+        <select formControlName="uType">
+          <option [ngValue]="null" [disabled]="true" >Select Type</option>
+          <option *ngFor="let type of accountType" [value]="type">{{ type }}</option>
         </select>
       </label>
       <app-input-field
-        class="w-full"
+        class="flex w-full mb-6"
         labelText="Full name"
         labelName="Full name"
         name="displayName"
@@ -16,16 +17,25 @@
         [control]="form.controls.displayName"
         [required]="true"
       ></app-input-field>
-      <label>
-        <span>Select a profile picture:</span>
-        <input type="file" (change)="selectFile($event)">
-      </label>
-      <button class="block mx-auto" type="button" (click)="stage1 = false">Next</button>
+      <div class="w-full mb-6">
+        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-32 p-3 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload Profile Picture</span></p>
+                <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF</p>
+            </div>
+            <input id="dropzone-file" type="file" class="hidden" (change)="selectFile($event)" />
+        </label>
+        <p class="my-2" *ngIf="selectedFile">Selected: {{ selectedFile.name }}</p>
+      </div> 
+      <app-button [message]="'Next'" [btnType]="'button'" (click)="stage1 = false">Next</app-button>
     </div>
     <div *ngIf="!stage1">
-      <button class="block mx-auto" type="button" (click)="stage1 = true">Back</button>
+      <button class="block mr-auto mb-6" type="button" (click)="stage1 = true">
+        <img src="../../../../../assets/icons/arrow-left.svg">
+      </button>
       <app-input-field
-        class="w-full"
+        class="block w-full mb-6"
         labelText="Phone number"
         labelName="Phone number"
         name="phoneNumber"
@@ -34,10 +44,13 @@
         [required]="true"
       ></app-input-field>
       <app-button
+        *ngIf="!isLoading"
         class="w-full"
         [message]="'Complete Signup'"
         [disabled]="!form.valid ? true : false"
+        [routerLink]="['/dashboard/home']"
       ></app-button>
+      <app-spinner class="mx-auto" *ngIf="isLoading"></app-spinner>
     </div>
   </form>
 </div>

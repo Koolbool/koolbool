@@ -18,7 +18,7 @@ export class UserService {
 
 
   // works but needs to be improved
-  addUser(u: any, img: any) {
+  async addUser(u: any, img: any) {
     const file = img;
 
     this.afAuth.authState.subscribe(async user => {

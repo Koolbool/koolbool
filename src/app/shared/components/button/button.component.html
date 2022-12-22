@@ -1,4 +1,4 @@
-<button class="relative flex justify-center w-full my-2 py-2 px-6 rounded-3xl text-white disabled:text-black bg-button-primary active:bg-button-active disabled:bg-button-disabled" [disabled]="disabled">
+<button class="relative flex justify-center w-full my-2 py-2 px-6 rounded-3xl text-white disabled:text-black bg-button-primary active:bg-button-active disabled:bg-button-disabled" [type]="btnType" [disabled]="disabled">
     <img *ngIf="image" class="absolute left-5" [src]="src">
     {{ message }}
 </button>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -9,19 +10,21 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class FinishSignupComponent implements OnInit {
 
-  accountType = [1, 2, 3];
+  isLoading: boolean = false;
+
+  accountType = ['Individual', 'Parent', 'Teacher'];
   stage1: boolean = true;
 
   selectedFile!: File;
 
   form = this.formBuilder.group({
-    uType: new FormControl<Number>(1, [Validators.required]),
+    uType: new FormControl<String | null>(null, [Validators.required]),
     displayName: new FormControl<string | null>(null, [Validators.required]),
     phoneNumber: new FormControl<string | null>(null, [Validators.required]),
     children: new FormControl<string[] | null>(null)
   })
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -31,15 +34,20 @@ export class FinishSignupComponent implements OnInit {
     console.log(this.selectedFile);
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.form?.valid) {
+      this.isLoading = true;
       console.log("form submitted");
       const user = {
         'uType': this.form.controls.uType.value,
         'displayName': this.form.controls.displayName.value,
         'phoneNumber': this.form.controls.phoneNumber.value,
       }
+      console.log(user);
       this.userService.addUser(user, this.selectedFile);
+      setTimeout(() => {
+        this.router.navigate(['/dashboard/home']);
+      }, 1000)
     }
     else {
       console.log("form aint valid");

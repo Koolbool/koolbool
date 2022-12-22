@@ -9,5 +9,6 @@ export class ButtonComponent {
   @Input() disabled: boolean = false;
   @Input() image: boolean = false;
   @Input() src!: string;
+  @Input() btnType!: string;
 
 }
