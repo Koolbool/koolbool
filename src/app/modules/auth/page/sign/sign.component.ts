@@ -49,14 +49,13 @@ export class SignComponent implements OnInit {
     console.log("are we on the signup page", this.isSignUp);
   }
 
-  onSubmit(): void {
+  async onSubmit() {
     console.log(this.form.value)
+    this.isLoading = true;
     if (this.form?.valid) {
       console.log("its valid");
-
-      this.isLoading = true;
       if (this.isSignUp) {
-        this.auth.register(this.form.value.email!, this.form.value.password!)
+        await this.auth.register(this.form.value.email!, this.form.value.password!)
           .then(res => {
             console.log('successful registration');
             console.log(res.user);
@@ -64,19 +63,17 @@ export class SignComponent implements OnInit {
           .catch(e => {
             this.error = e.message;
           })
-        this.isLoading = false;
       } else {
-        this.auth.login(this.form?.value.email!, this.form?.value.password!)
+        await this.auth.login(this.form?.value.email!, this.form?.value.password!)
           .then(res => {
             console.log('login successful');
           })
           .catch(e => {
             this.error = e.message;
           })
-        this.isLoading = false;
       }
 
-      this.form.reset();
+      // this.form.reset();
     } else {
       console.log("it aint valid");
       return

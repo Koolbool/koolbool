@@ -4,6 +4,10 @@
         <span class="block text-center mx-auto font-bold w-full mb-6">Discover. Review. Share.</span>
         <span class="block text-center w-full mx-auto">All your favourite books in one place. You can rate any book. Anywhere! Anytime!</span>
     </div>
+
+    <div *ngIf="isLoading">
+        <app-spinner></app-spinner>
+    </div>
     <form
         [formGroup]="form"
         (ngSubmit)="onSubmit()"
@@ -55,9 +59,6 @@
 
     <div *ngIf="!isSignUp"><a [routerLink]="['/auth/forgot-password']">Forgot password</a></div>
 
-    <div *ngIf="isLoading">
-        <app-spinner></app-spinner>
-    </div>
     <div *ngIf="error">
         <p>{{ error }}</p>
     </div>
