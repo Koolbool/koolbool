@@ -21,7 +21,7 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToDashboard }
   },
   // fallback route when no other route match
-  { path: '**', redirectTo: '/auth/login', pathMatch: 'full' }
+  { path: '**', redirectTo: '/auth/landing', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -7,13 +7,15 @@ import { ChangePasswordComponent } from './page/change-password/change-password.
 import { ForgotPasswordComponent } from './page/forgot-password/forgot-password.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LandingComponent } from './page/landing/landing.component';
 
 
 @NgModule({
   declarations: [
     SignComponent,
     ChangePasswordComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    LandingComponent
   ],
   imports: [
     CommonModule,
