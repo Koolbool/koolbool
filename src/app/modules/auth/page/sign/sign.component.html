@@ -1,45 +1,64 @@
-<div class="flex flex-col items-center text-center">
-    <img type="png" src="../../../../../assets/icons/koolbool.png">
+<div class="flex flex-col items-center w-5/6 mx-auto">
+    <h1 class="relative mx-auto font-semibold mt-12 mb-6 text-3xl">KOOBOOL</h1>
+    <div>
+        <span class="block text-center mx-auto font-bold w-full mb-6">Discover. Review. Share.</span>
+        <span class="block text-center w-full mx-auto">All your favourite books in one place. You can rate any book. Anywhere! Anytime!</span>
+    </div>
+    <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        *ngIf="!isLoading"
+        class="w-full my-6"
+    >
+        <app-input-field
+            class="w-full mb-4"
+            labelText="Email address"
+            labelName="Email"
+            name="email"
+            type="email"
+            [placeholder]="'name@email.com'"
+            [control]="$any(form.get('email'))"
+            [required]="true"
+        ></app-input-field>
+        <app-input-field
+            class="w-full mb-4"
+            labelText="Password"
+            labelName="Password"
+            name="password"
+            type="password"
+            [placeholder]="'Enter your password'"
+            [control]="$any(form.get('password'))"
+        ></app-input-field>
+        <app-input-field
+            class="w-full mb-4"
+            *ngIf="isSignUp"
+            labelText="Confirm password"
+            labelName="Confirm Password"
+            name="confirmPassword"
+            type="password"
+            [placeholder]="'Confirm your password'"
+            [control]="$any(form.get('confirmPassword'))"
+        ></app-input-field>
+        <app-button
+            class="w-full"
+            [message]="isSignUp === false ? 'Log In' : 'Sign Up'"
+            [disabled]="!form.valid ? true : false"
+        ></app-button>
+    </form>
+
+
+    <app-button *ngIf="isSignUp" class="w-full" [message]="'Sign in'" [routerLink]="['/auth/login']"></app-button>
+    <app-button *ngIf="!isSignUp" class="w-full" [message]="'Create Account'" [routerLink]="['/auth/register']"></app-button>
+
+    <!-- Create functionality for sign in with apple? -->
+    <app-button *ngIf="!isSignUp" class="w-full" [message]="'Continue with Apple'" [disabled]="true" [image]="true" [src]="'../../../../../assets/icons/ion_logo-apple.svg'"></app-button>
+
+    <div *ngIf="!isSignUp"><a [routerLink]="['/auth/forgot-password']">Forgot password</a></div>
+
     <div *ngIf="isLoading">
         <app-spinner></app-spinner>
     </div>
     <div *ngIf="error">
         <p>{{ error }}</p>
     </div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading" class="w-2/3">
-        <app-input-field
-            class="w-full"
-            labelText="Email"
-            labelName="Email"
-            name="email"
-            type="email"
-            [control]="$any(form.get('email'))"
-            [required]="true"
-        ></app-input-field>
-        <app-input-field
-            class="w-full"
-            labelText="Password"
-            labelName="Password"
-            name="password"
-            type="password"
-            [control]="$any(form.get('password'))"
-        ></app-input-field>
-        <app-input-field
-            class="w-full"
-            *ngIf="isSignUp"
-            labelText="Confirm password"
-            labelName="Confirm Password"
-            name="confirmPassword"
-            type="password"
-            [control]="$any(form.get('confirmPassword'))"
-        ></app-input-field>
-        <app-button
-            class="w-full"
-            [message]="isSignUp === false ? 'Login' : 'Sign Up'"
-            [disabled]="!form.valid ? true : false"
-        ></app-button>
-    </form>
-    <div *ngIf="isSignUp">Have an account? click <a [routerLink]="['/auth/login']" class="underline">here</a> to sign in</div>
-    <div *ngIf="!isSignUp">Don't have an account? Click <a [routerLink]="['/auth/register']" class="underline">here</a> to sign up</div>
-    <div *ngIf="!isSignUp"><a [routerLink]="['/auth/forgot-password']">Forgot password</a></div>
 </div>

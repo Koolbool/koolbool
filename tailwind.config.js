@@ -6,8 +6,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#EF9A53'
+        button: {
+          primary: '#EF9A53',
+          active: '#FFA65B',
+          disabled: '#EDEDED'
+        },
+        input: {
+          primary: '#7C7C7C',
+          secondary: '#C0BCBC'
+        }
       }
+      
     },
   },
   plugins: [],

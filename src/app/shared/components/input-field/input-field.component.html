@@ -1,11 +1,11 @@
 
 <div class="flex flex-col w-full text-left mt-1">
-    <label *ngIf="labelText" [for]="name">{{ labelText }}</label>
+    <label *ngIf="labelText" [for]="name" class="text-input-primary">{{ labelText }}</label>
     <input
         [type]="type"
         [name]="name"
         [placeholder]="placeholder"
-        class="w-full rounded-2xl focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 py-1 px-2 bg-sky-50 border border-slate-300"
+        class="w-full focus:outline-none py-1 border-b placeholder:text-input-secondary"
         [formControl]="control"
         [required]="required"
     >
