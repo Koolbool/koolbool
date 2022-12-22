@@ -50,11 +50,11 @@ const routes: Routes = [
     component: ReviewComponent,
     canActivate: [FullAuthGuardService]
   },
-  {
-    path: '',
-    redirectTo: '/dashboard/home',
-    pathMatch: 'full',
-  }
+  // {
+  //   path: '',
+  //   redirectTo: '/dashboard/complete-signup',
+  //   pathMatch: 'full',
+  // }
 ];
 
 @NgModule({

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Router } from '@angular/router';
 import { User } from '@firebase/auth';
 import { map, Observable, ReplaySubject, Subject, switchMap, tap } from 'rxjs';
 
@@ -12,7 +13,7 @@ export class UserService {
   
   private userCollection: AngularFirestoreCollection<User>;
 
-  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth, private storage: AngularFireStorage) {
+  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth, private storage: AngularFireStorage, private router: Router) {
     this.userCollection = afs.collection<User>('Users');
   }
 
@@ -31,8 +32,10 @@ export class UserService {
       await task;
       this.storage.ref(filePath).getDownloadURL().subscribe(getDownloadURL => {
         u.photoURL = getDownloadURL;
-        this.userCollection.doc(user?.uid).set(u);
-      });
+        this.userCollection.doc(user?.uid).set(u).then(() => {
+          this.router.navigateByUrl('/dashboard/home');
+        });
+      })
     })
   }
 

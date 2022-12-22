@@ -45,9 +45,6 @@ export class FinishSignupComponent implements OnInit {
       }
       console.log(user);
       this.userService.addUser(user, this.selectedFile);
-      setTimeout(() => {
-        this.router.navigate(['/dashboard/home']);
-      }, 1000)
     }
     else {
       console.log("form aint valid");
