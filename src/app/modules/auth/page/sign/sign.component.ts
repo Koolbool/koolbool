@@ -13,14 +13,10 @@ export class SignComponent implements OnInit {
   isLoading = false;
   error: string = '';
 
-  email = new FormControl(null, [Validators.required]);
-  password = new FormControl(null, [Validators.required]);
-  confirmPassword = new FormControl(null);
-
   form = this.formBuilder.group({
-    email: this.email,
-    password: this.password,
-    confirmPassword: this.confirmPassword
+    email: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, [Validators.required]),
+    confirmPassword: new FormControl(null)
   });
 
   constructor(private route: ActivatedRoute, private auth: AuthService, private router: Router, private formBuilder: FormBuilder) {
@@ -55,7 +51,8 @@ export class SignComponent implements OnInit {
     if (this.form?.valid) {
       console.log("its valid");
       if (this.isSignUp) {
-        await this.auth.register(this.form.value.email!, this.form.value.password!)
+        if (this.form.controls.password.value === this.form.controls.confirmPassword.value) {
+          await this.auth.register(this.form.value.email!, this.form.value.password!)
           .then(res => {
             console.log('successful registration');
             console.log(res.user);
@@ -63,6 +60,13 @@ export class SignComponent implements OnInit {
           .catch(e => {
             this.error = e.message;
           })
+        } else {
+          this.isLoading = false;
+          if (this.form.controls.password.value != this.form.controls.confirmPassword.value) {
+            this.error = 'Please make sure your password is matching!';
+          }
+          return
+        }
       } else {
         await this.auth.login(this.form?.value.email!, this.form?.value.password!)
           .then(res => {

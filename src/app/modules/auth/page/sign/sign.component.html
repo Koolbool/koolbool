@@ -40,6 +40,7 @@
             labelName="Confirm Password"
             name="confirmPassword"
             type="password"
+            [required]="true"
             [placeholder]="'Confirm your password'"
             [control]="$any(form.get('confirmPassword'))"
         ></app-input-field>
@@ -49,7 +50,10 @@
             [disabled]="!form.valid ? true : false"
         ></app-button>
     </form>
-
+    
+    <div *ngIf="error">
+        <p>{{ error }}</p>
+    </div>
 
     <app-button *ngIf="isSignUp" class="w-full" [message]="'Sign in'" [routerLink]="['/auth/login']"></app-button>
     <app-button *ngIf="!isSignUp" class="w-full" [message]="'Create Account'" [routerLink]="['/auth/register']"></app-button>
@@ -58,8 +62,4 @@
     <app-button *ngIf="!isSignUp" class="w-full" [message]="'Continue with Apple'" [disabled]="true" [image]="true" [src]="'../../../../../assets/icons/ion_logo-apple.svg'"></app-button>
 
     <div *ngIf="!isSignUp"><a [routerLink]="['/auth/forgot-password']">Forgot password</a></div>
-
-    <div *ngIf="error">
-        <p>{{ error }}</p>
-    </div>
 </div>
