@@ -28,5 +28,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Deploy
 
-run `ng build -configuration production`
+run `ng build --configuration production`
 run `firebase deploy --only hosting:koolbool-webapp`
