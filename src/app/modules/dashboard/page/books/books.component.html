@@ -31,27 +31,23 @@
     </ng-container>
   </ng-container>
 
-  <ng-container *ngIf="!searchedBook">
-    <ng-container *ngIf="books | async as booksList">
-      <div>
-        Search for a book name above to see a specific book!
-      </div>
-      <ul>
-        <li *ngFor="let book of booksList" class="py-2">
-          <img [src]="book.bookimgurl">
-          <div>
-            Name: {{ book.bookname }}
-          </div>
-          <div>
-            Authors: By {{ book.bookauthors }}
-          </div>
-          <div>
-            Categories: {{ book.categories }}
-          </div>
-          <a [routerLink]="['/dashboard/book/', book.id]">Click here to view book</a>
-        </li>
-      </ul>
-      <button (click)="getNextBooks()">Get next books</button>
+  <div class="w-5/6 mx-auto">
+    <ng-container *ngIf="!searchedBook">
+      <ng-container *ngIf="books | async as booksList">
+        <div>
+          Search for a book name above to see a specific book!
+        </div>
+        <div class="flex flex-wrap justify-between">
+          <app-book-display
+            *ngFor="let book of booksList"
+            class="w-2/5 m-2 cursor-pointer"
+            [src]="book.bookimgurl"
+            [name]="book.bookname"
+            [routerLink]="['/dashboard/book/', book.id]"
+          ></app-book-display>
+        </div>
+        <button (click)="getNextBooks()">Get next books</button>
+      </ng-container>
     </ng-container>
-  </ng-container>
+  </div>
 </div>

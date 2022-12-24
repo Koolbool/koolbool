@@ -4,6 +4,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BookDisplayComponent } from './components/book-display/book-display.component';
 
 
 
@@ -11,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     ButtonComponent,
     SpinnerComponent,
-    InputFieldComponent
+    InputFieldComponent,
+    BookDisplayComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     ButtonComponent,
     SpinnerComponent,
-    InputFieldComponent
+    InputFieldComponent,
+    BookDisplayComponent
   ]
 })
 export class SharedModule { }
