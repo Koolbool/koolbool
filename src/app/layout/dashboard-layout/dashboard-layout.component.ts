@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from 'src/app/shared/auth.service';
+import { User } from 'src/app/shared/services/user';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -9,7 +12,17 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class DashboardLayoutComponent implements OnInit {
   navIsOpen: boolean = false;
 
-  constructor(private auth: AuthService) {}
+  user!: User;
+
+  constructor(private auth: AuthService, private userService: UserService, private afAuth: AngularFireAuth) {
+    this.afAuth.authState.subscribe(
+      async (res) => {
+        return await this.userService.getUser(res?.uid as string).then((e) => {
+          this.user = e as User;
+        });
+      }
+    )
+  }
 
   ngOnInit(): void {
   }
