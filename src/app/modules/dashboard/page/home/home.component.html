@@ -1,1 +1,11 @@
-<p>home works!</p>
+<ng-container *ngIf="user">
+    <span>Hello there, <div class="font-semibold">{{ user.displayName.split(' ')[0] }}</div></span>
+    <div>
+        <h2>New arrivals</h2>
+        <div>Arrivals</div>
+    </div>
+    <div>
+        <h2>Your reviews</h2>
+        <div>reviews</div>
+    </div>
+</ng-container>
