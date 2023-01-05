@@ -31,15 +31,15 @@ export class UserService {
   }
 
 
-  // Get current user
-  async getUser(id: string) {
-    // return this.userCollection.doc(id).valueChanges();
-    return new Promise((resolve, reject) => {
-      this.userCollection.doc(id).get().subscribe((user) => {
-        resolve(user.data());
-      })
-    })
-  }
+  // // Get current user
+  // async getUser(id: string) {
+  //   // return this.userCollection.doc(id).valueChanges();
+  //   return new Promise((resolve, reject) => {
+  //     this.userCollection.doc(id).get().subscribe((user) => {
+  //       resolve(user.data());
+  //     })
+  //   })
+  // }
 
   // works but needs to be improved
   async addUser(u: any, img: any) {
