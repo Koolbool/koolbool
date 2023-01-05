@@ -6,4 +6,5 @@ export interface Book {
   categories: string[];
   bookurl: string;
   bookimgurl?: string;
+  createdDate: Date;
 }

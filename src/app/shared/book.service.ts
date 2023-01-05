@@ -37,12 +37,13 @@ export class BookService {
   // add a book to the collection
   async addBook(b: Book, e: any) {
     const file = e;
-    const filePath = 'book/' + e.name;
+    const filePath = 'book/' + b.bookname + '/' + e.name;
     const task = this.storage.upload(filePath, file);
 
     await task;
     this.storage.ref(filePath).getDownloadURL().subscribe(getDownloadURL => {
       b.bookimgurl = getDownloadURL;
+      b.createdDate = new Date();
       this.booksCollection.add(b).then((e) => console.log(e));
     });
 

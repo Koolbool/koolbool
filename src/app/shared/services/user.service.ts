@@ -17,6 +17,19 @@ export class UserService {
     this.userCollection = afs.collection<User>('Users');
   }
 
+  async getUser(uid: string): Promise<User> {
+    return new Promise((resolve, reject) => {
+      this.afs.collection('Users').doc(uid).ref.get().then((user) => {
+        if (user.exists) {
+          console.log(user.data() as User);
+          resolve(user.data() as User);
+        } else {
+          reject("theres no user");
+        }
+      })
+    })
+  }
+
 
   // Get current user
   async getUser(id: string) {
