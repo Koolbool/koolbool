@@ -2,20 +2,15 @@
     <!-- <nav 
         class="flex w-full flex-col bg-slate-100"
         [ngClass]="navIsOpen ? 'h-screen' : ''"
-    >
+    > -->
+
         <div 
             class="flex w-full"
             [ngClass]="navIsOpen ? 'justify-start' : 'justify-end'"
         >
-            <div
-                class="flex p-1 m-2"
-                (click)="navIsOpen = !navIsOpen"
-            >
-                <img src="../../../assets/icons/menu.svg">
-            </div>
         </div>
-        <div class="w-full flex justify-center text-center" *ngIf="navIsOpen">
-            <ul>
+        <div class="w-full flex justify-center text-center h-screen" *ngIf="navIsOpen">
+            <ul class="p-10">
                 <li><a routerLink="/dashboard/home" (click)="navIsOpen = false">Home</a></li>
                 <li><a routerLink="/dashboard/profile" (click)="navIsOpen = false">Profile</a></li>
                 <li><a routerLink="/dashboard/books" (click)="navIsOpen = false">Books</a></li>
@@ -23,13 +18,16 @@
                 <li><a (click)="onLogout()" (click)="navIsOpen = false">Logout</a></li>
             </ul>
         </div>
-    </nav> -->
-    <nav class="bg-white w-full fixed bottom-0 ">
-        <ul class="flex justify-between w-5/6 mx-auto py-6">
-            <li><a class="flex items-center" routerLink="/dashboard/home"><img class="h-4 pr-2" src="../../../assets/icons/home.svg">Home</a></li>
-            <li><a class="flex items-center" routerLink="/dashboard/books"><img class="h-4 pr-2" src="../../../assets/icons/books.svg">Books</a></li>
-            <li><a class="flex items-center"><img class="h-4 pr-2" src="../../../assets/icons/settings.svg">Settings</a></li>
-        </ul>
+    <!-- </nav> -->
+    <nav>
+        <div class="bg-white w-full fixed bottom-0">
+            <ul class="flex justify-between w-5/6 mx-auto py-6">
+                <li><a class="flex items-center" routerLink="/dashboard/home"><img class="h-4 pr-2" src="../../../assets/icons/home.svg">Home</a></li>
+                <li><a class="flex items-center" routerLink="/dashboard/books"><img class="h-4 pr-2" src="../../../assets/icons/books.svg">Books</a></li>
+                <li><a class="flex items-center" (click)="navIsOpen = !navIsOpen"><img class="h-4 pr-2" src="../../../assets/icons/settings.svg">Settings</a></li>
+            </ul>
+        </div>
+
     </nav>
     <ng-container *ngIf="user">
         <div class="flex justify-between w-5/6 mx-auto mt-6 mb-4">

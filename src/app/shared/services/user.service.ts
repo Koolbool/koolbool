@@ -17,29 +17,29 @@ export class UserService {
     this.userCollection = afs.collection<User>('Users');
   }
 
-  async getUser(uid: string): Promise<User> {
-    return new Promise((resolve, reject) => {
-      this.afs.collection('Users').doc(uid).ref.get().then((user) => {
-        if (user.exists) {
-          console.log(user.data() as User);
-          resolve(user.data() as User);
-        } else {
-          reject("theres no user");
-        }
-      })
-    })
-  }
-
-
-  // // Get current user
-  // async getUser(id: string) {
-  //   // return this.userCollection.doc(id).valueChanges();
+  // async getUser(uid: string): Promise<User> {
   //   return new Promise((resolve, reject) => {
-  //     this.userCollection.doc(id).get().subscribe((user) => {
-  //       resolve(user.data());
+  //     this.afs.collection('Users').doc(uid).ref.get().then((user) => {
+  //       if (user.exists) {
+  //         console.log(user.data() as User);
+  //         resolve(user.data() as User);
+  //       } else {
+  //         reject("theres no user");
+  //       }
   //     })
   //   })
   // }
+
+
+  // // Get current user
+  async getUser(id: string) {
+    // return this.userCollection.doc(id).valueChanges();
+    return new Promise((resolve, reject) => {
+      this.userCollection.doc(id).get().subscribe((user) => {
+        resolve(user.data());
+      })
+    })
+  }
 
   // works but needs to be improved
   async addUser(u: any, img: any) {
@@ -62,7 +62,7 @@ export class UserService {
     })
   }
 
-  async hasUserCompletedFullSignup() {
+  async hasUserCompletedFullSignup()  {
     // need to make sure this includes the User interface in the future || works but maybe need to check if there is
     // something else I can use rather than display name in the future?
     return new Promise((resolve, reject) => {
