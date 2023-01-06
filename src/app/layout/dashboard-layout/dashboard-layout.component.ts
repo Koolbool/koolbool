@@ -12,13 +12,14 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class DashboardLayoutComponent implements OnInit {
   navIsOpen: boolean = false;
 
-  user!: User;
+  user!: any;
 
   constructor(private auth: AuthService, private userService: UserService, private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(
       async (res) => {
         return await this.userService.getUser(res?.uid as string).then((e) => {
-          this.user = e as User;
+          this.user = e;
+          console.log(this.user);
         });
       }
     )

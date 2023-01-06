@@ -34,6 +34,7 @@ export class UserService {
   // // Get current user
   async getUser(id: string) {
     // return this.userCollection.doc(id).valueChanges();
+    console.log("this has been used to fetch user");
     return new Promise((resolve, reject) => {
       this.userCollection.doc(id).get().subscribe((user) => {
         resolve(user.data());
