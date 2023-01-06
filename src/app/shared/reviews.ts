@@ -4,4 +4,6 @@ export interface reviews {
   rate: number;
   title: string;
   comment: string;
+  reviewImg?: string;
+  createdDate: Date;
 }

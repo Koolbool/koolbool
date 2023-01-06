@@ -7,22 +7,43 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Book } from './book';
 import { reviews } from './reviews';
 import firebase from 'firebase/compat/app'
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
 
-  constructor( private fs: AngularFirestore ) {
+  constructor( private fs: AngularFirestore, private storage: AngularFireStorage) {
 
   }
 
   // add a review to the collection
-  addReview(r: reviews, docId: string | null) {
-    const docRef = this.fs.collection('Books').doc(docId as string);
+  async addReview(r: reviews, docId: string | null, e:any) {
+    if (e) {
+      // storing review image
+      const file = e;
+      // make it so that it stores with the bookname in the future
+      const filePath = 'book/' + docId + '/' + e.name;
+      const task = this.storage.upload(filePath, file);
 
-    docRef.update({
-      reviews: firebase.firestore.FieldValue.arrayUnion(r)
-    })
+      await task;
+
+      this.storage.ref(filePath).getDownloadURL().subscribe(getDownloadURL => {
+        r.reviewImg = getDownloadURL;
+        r.createdDate = new Date();
+        const docRef = this.fs.collection('Books').doc(docId as string);
+
+        docRef.update({
+          reviews: firebase.firestore.FieldValue.arrayUnion(r)
+        })
+      });
+    } else {
+      const docRef = this.fs.collection('Books').doc(docId as string);
+
+      docRef.update({
+        reviews: firebase.firestore.FieldValue.arrayUnion(r)
+      })
+    }
   }
 
   // ------------

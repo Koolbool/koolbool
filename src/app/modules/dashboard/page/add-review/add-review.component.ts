@@ -11,7 +11,8 @@ import { reviews } from 'src/app/shared/reviews';
 })
 export class AddReviewComponent implements OnInit {
   id: string;
-  
+  selectedFile!: File;
+
   form = this.formBuilder.group({
     title: new FormControl<string>('', [Validators.required]),
     comment: new FormControl<string>('', Validators.required)
@@ -20,9 +21,13 @@ export class AddReviewComponent implements OnInit {
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private reviewService: ReviewService, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id') as string;
   }
+  
+  ngOnInit(): void {
+  }
 
-  ngOnInit() {
-    
+  selectFile(event: any) {
+    this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile);
   }
 
   onSubmit() {
@@ -34,7 +39,7 @@ export class AddReviewComponent implements OnInit {
         'uid': '123',
         'bookid': this.id
       }
-      this.reviewService.addReview(review as reviews, this.id);
+      this.reviewService.addReview(review as reviews, this.id, this.selectedFile);
       console.log("success!");
       console.log("Routing you back to book page in 3 seconds!");
       setTimeout(() => {

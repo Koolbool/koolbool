@@ -18,5 +18,7 @@
     [control]="form.controls.comment"
   ></app-input-field>
 
+  <input type="file" (change)="selectFile($event)">
+
   <app-button [message]="'Add Review'" [disabled]="!form.valid"></app-button>
 </form>
